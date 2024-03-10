@@ -1,0 +1,61 @@
+<div class="vh-100 d-flex flex-column">
+  <mat-toolbar>
+    <h1>Wiki</h1>
+    <button
+      type="button"
+      mat-stroked-button
+      class="search-button w-100 mx-auto"
+      (click)="onSearch()"
+    >
+      <mat-icon>search</mat-icon>
+      <div
+        class="flex-grow-1 d-flex align-items-center justify-content-between lh-base"
+      >
+        <span>Search...</span>
+        <kbd>⌘K</kbd>
+      </div>
+    </button>
+  </mat-toolbar>
+
+  <ng-template #searchDialog>
+    <div mat-dialog-title class="pt-2 px-3 pb-0">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <mat-dialog-content class="p-0">
+      <mat-action-list class="py-0">
+        <button mat-list-item>Item 1</button>
+        <button mat-list-item>Item 2</button>
+        <button mat-list-item>Item 3</button>
+        <button mat-list-item>Item 4</button>
+      </mat-action-list>
+    </mat-dialog-content>
+    <mat-dialog-actions class="py-0 px-3">
+      <div>Press <kbd>ESC</kbd> to close</div>
+    </mat-dialog-actions>
+  </ng-template>
+
+  <mat-sidenav-container class="flex-grow-1">
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        @for (page of pages(); track page.id) {
+        <a
+          mat-list-item
+          [routerLink]="['/page', page.id]"
+          routerLinkActive="active"
+          >{{ page.title }}</a
+        >
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container py-3">
+        <router-outlet />
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
