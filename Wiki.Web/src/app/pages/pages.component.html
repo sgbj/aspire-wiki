@@ -1,0 +1,19 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list class="navlist">
+      <h3 matSubheader>Pages</h3>
+      @for (page of pageService.pages(); track page.id) {
+      <a
+        mat-list-item
+        [routerLink]="['/pages', page.id]"
+        routerLinkActive="navlist-item-active"
+        >{{ page.title }}</a
+      >
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>

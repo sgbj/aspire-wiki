@@ -1,0 +1,41 @@
+@if ((breakpoint$ | async)?.matches) {
+<button type="button" mat-icon-button (click)="onSearch()">
+  <mat-icon>search</mat-icon>
+</button>
+} @else {
+<button
+  type="button"
+  mat-stroked-button
+  (click)="onSearch()"
+  class="search-button"
+>
+  <mat-icon>search</mat-icon>
+  Search...
+  <kbd>⌘K</kbd>
+</button>
+}
+
+<ng-template #searchDialog>
+  <div mat-dialog-title>
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search</mat-label>
+      <input matInput autocomplete="off" [formControl]="searchControl" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <mat-dialog-content>
+    <mat-action-list>
+      @for (searchResult of searchResults(); track searchResult.id) {
+      <a
+        mat-list-item
+        [routerLink]="['/pages', searchResult.id]"
+        mat-dialog-close
+        >{{ searchResult.title }}</a
+      >
+      }
+    </mat-action-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div>Press <kbd>ESC</kbd> to close</div>
+  </mat-dialog-actions>
+</ng-template>

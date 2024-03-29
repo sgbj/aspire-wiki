@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Get started</h1>
+
+  <ul>
+    <li>👈 Click on a page on the left to view it.</li>
+    <li>
+      ✏️ Use the floating action button on the bottom right to create and edit
+      pages.
+    </li>
+  </ul>
+
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon> Create page
+  </button>
+
+  <app-page-fab (create)="onCreate()" />
+</div>

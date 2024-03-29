@@ -1,0 +1,18 @@
+<button mat-icon-button [matMenuTriggerFor]="themeMenu" matTooltip="Theme">
+  <mat-icon> {{ themeConfigs[themeService.theme()].icon }} </mat-icon>
+</button>
+<mat-menu #themeMenu="matMenu">
+  @for (theme of themes; track theme) {
+  <button mat-menu-item (click)="themeService.theme.set(theme)">
+    <mat-icon [color]="themeService.theme() === theme ? 'accent' : undefined">
+      {{
+        themeService.theme() === theme
+          ? "radio_button_checked"
+          : "radio_button_unchecked"
+      }}
+    </mat-icon>
+    <mat-icon>{{ themeConfigs[theme].icon }}</mat-icon>
+    {{ themeConfigs[theme].label }}
+  </button>
+  }
+</mat-menu>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="chat-header">
+    <h1>Chat</h1>
+    <button
+      type="button"
+      mat-icon-button
+      matTooltip="Clear"
+      (click)="onClear()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div class="messages">
+    <div #messageContainer class="messages-inner-container">
+      @for (message of messages; track message.content) {
+      <div class="message message-{{ message.role }}">
+        <div class="role">{{ message.role }}</div>
+        {{ message.content.trim() }}
+      </div>
+      }
+    </div>
+  </div>
+
+  @if (loading) {
+  <mat-spinner diameter="40" />
+  }
+
+  <mat-form-field>
+    <mat-label>Message</mat-label>
+    <textarea
+      #message
+      matInput
+      (keydown.enter)="onSubmit($event, message)"
+    ></textarea>
+  </mat-form-field>
+</div>

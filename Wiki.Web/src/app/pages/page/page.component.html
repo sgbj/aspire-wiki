@@ -1,0 +1,30 @@
+<div class="container">
+  @if (edit()) {
+  <editor
+    [init]="{
+      plugins: 'quickbars lists link image table code help wordcount',
+      toolbar: false,
+      menubar: false,
+      inline: true,
+      promotion: false,
+      images_upload_url: '/api/blobs'
+    }"
+    [formControl]="contentControl"
+  ></editor>
+  <app-page-fab (save)="onSave()" (cancel)="onCancel()" />
+  } @else {
+  <div [innerHTML]="safeContent()"></div>
+  <app-page-fab (create)="onCreate()" (edit)="onEdit()" (delete)="onDelete()" />
+  }
+</div>
+
+<ng-template #deleteDialog>
+  <h3 mat-dialog-title>Delete page</h3>
+  <mat-dialog-content>
+    <p>Are you sure you want to delete this page?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+  </mat-dialog-actions>
+</ng-template>

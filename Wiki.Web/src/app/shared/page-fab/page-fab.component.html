@@ -1,0 +1,34 @@
+<button
+  mat-fab
+  [color]="save.observed ? 'accent' : 'primary'"
+  matTooltip="Actions"
+  class="page-fab"
+  [matMenuTriggerFor]="pageMenu"
+>
+  <mat-icon>edit</mat-icon>
+</button>
+
+<mat-menu #pageMenu="matMenu">
+  @if (create.observed) {
+  <button mat-menu-item (click)="create.next()">
+    <mat-icon>add</mat-icon> New page
+  </button>
+  } @if (edit.observed) {
+  <button mat-menu-item (click)="edit.next()">
+    <mat-icon>edit</mat-icon> Edit page
+  </button>
+  } @if (save.observed) {
+  <button mat-menu-item (click)="save.next()">
+    <mat-icon>save</mat-icon> Save page
+  </button>
+  } @if (cancel.observed) {
+  <button mat-menu-item (click)="cancel.next()">
+    <mat-icon>close</mat-icon> Cancel
+  </button>
+  } @if (delete.observed) {
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="delete.next()">
+    <mat-icon>delete</mat-icon> Delete page
+  </button>
+  }
+</mat-menu>

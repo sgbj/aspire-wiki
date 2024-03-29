@@ -1,0 +1,99 @@
+@use "@angular/material" as mat;
+@use "sass:color";
+
+@mixin theme($theme) {
+  ::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.26);
+  }
+
+  a:not(.mat-mdc-button-base) {
+    color: mat.get-theme-color($theme, primary);
+    text-decoration: none;
+  }
+
+  .mce-edit-focus {
+    outline: 0;
+  }
+
+  .container {
+    box-sizing: border-box;
+    padding: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .search-dialog {
+    .search-field {
+      --mdc-outlined-text-field-container-shape: 32px;
+      width: 100%;
+      margin-bottom: -16px;
+    }
+
+    mat-dialog-content {
+      padding: 0;
+    }
+
+    mat-action-list {
+      padding: 0;
+    }
+  }
+
+  .mat-mdc-dialog-content {
+    max-height: unset;
+  }
+
+  .navbar {
+    color: mat.get-theme-color($theme, primary);
+    background: mat.get-theme-color($theme, primary-container);
+
+    .mat-mdc-button:not(:disabled),
+    .mat-mdc-icon-button {
+      color: mat.get-theme-color($theme, primary);
+    }
+
+    .navbar-item-active {
+      background: rgba(mat.get-theme-color($theme, primary), 0.1);
+    }
+  }
+
+  mat-sidenav {
+    border-right: 1px solid mat.get-theme-color($theme, outline-variant);
+    border-radius: 0;
+  }
+
+  .navlist {
+    .navlist-item-active {
+      background: rgba(mat.get-theme-color($theme, primary), 0.15);
+
+      .mdc-list-item__primary-text {
+        color: color.adjust(
+          mat.get-theme-color($theme, primary),
+          $lightness: if(mat.get-theme-type($theme) == dark, 25%, 0%)
+        );
+      }
+
+      &:hover {
+        background: rgba(mat.get-theme-color($theme, primary), 0.25);
+      }
+    }
+  }
+
+  app-footer {
+    border-top: 1px solid mat.get-theme-color($theme, outline-variant);
+  }
+
+  .message-user {
+    background: mat.get-theme-color($theme, surface-container-high);
+    color: mat.get-theme-color($theme, on-surface);
+  }
+
+  .message-assistant {
+    background: mat.get-theme-color($theme, primary-container);
+    color: mat.get-theme-color($theme, on-primary-container);
+  }
+}
